@@ -57,5 +57,35 @@ End: 2:30
 
  - Checking if SKLearn has a ZeroR implementation
  - [DummyClassifier seems to be ZeroR like](http://scikit-learn.org/stable/modules/generated/sklearn.dummy.DummyClassifier.html)
+ - Implemented dummy classifier w/ constant reponse. 
+ - Dummy accuracy: .408355132927
+ 
+### Creating keras model
+
+Start: 2:30
+End: 4:15
+
+ - Using DL due to (mostly) numeric data, multiple output classes
+ - Subsetting to regressors that are numerical in the input data set
+ - Looking up `compstat_`
+ - Compstat_ represents when the police report was created
+ 
+Naturally numerical:
+
+ - occurrence_day
+ - occurrence_day
+ - occurrence_year
+ - compstat_month
+ - compstat_day
+ - compstat_year
+ - lat
+ - long
+
+Easy to conver to numerical
+
+ - occurence_month (mapping)
+ - Borough (dummy or `MANHATTAN` OR NOT)
+ - Jurisdiction (dummy or majority case or not)
+ - occurence_date epoch time or something
  
  
