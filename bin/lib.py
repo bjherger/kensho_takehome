@@ -3,6 +3,7 @@ import logging
 import os
 import tempfile
 
+import numpy
 import pandas
 import yaml
 
@@ -125,3 +126,33 @@ def archive_dataset_schemas(step_name, local_dict, global_dict):
 
     # Write to file
     agg_schema_df.to_csv(schema_output_path, index_label='variable')
+
+def create_label_encoder(labels):
+    """
+    Create a lookup from each of the given labels to a one hot encoded representation of that label.
+     - Assign an index to every label
+     - Create a zero vector for that label
+     - Set the one hot encoded index of that label to one
+     - Add label and one hot encoding to lookup dict
+     - Result is a dictionary like: label -> one hot encoded value (e.g.
+        {'apple': [1,0,0],
+        'banana': [0,1,0],
+        'cranberry': [0,0,1]}
+    :param labels: A list of labels
+    :type labels: [str]
+    :return: Dict, mapping label -> one hot encoded value
+    :rtype: {str:numpy.array}
+    """
+
+    # Reference variables
+    label_encoder = dict()
+
+    label_set = set(labels)
+
+    for (index, label) in enumerate(label_set):
+        lookup_value = numpy.zeros(len(label_set))
+        lookup_value[index] = 1
+
+        label_encoder[label] = lookup_value
+
+    return label_encoder
