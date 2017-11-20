@@ -22,3 +22,5 @@ lat,float64,observations
 long,float64,observations
 response,object,observations
 is_grand_larceny,bool,observations
+max_probability,float64,observations
+modeling_prediction,object,observations

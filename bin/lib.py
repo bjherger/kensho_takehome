@@ -156,3 +156,11 @@ def create_label_encoder(labels):
         label_encoder[label] = lookup_value
 
     return label_encoder
+
+def prop_to_label(x, label_encoder):
+    response_index = numpy.argmax(x)
+    index_lookup = dict()
+    for key, value in label_encoder.items():
+        index_lookup[numpy.argmax(value)] = key
+
+    return index_lookup[response_index]
