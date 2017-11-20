@@ -54,7 +54,8 @@ def model(observations):
     print('Dummy modle accuracy: {}'.format(dummy_clf.score(dummy_X, dummy_y)))
 
     # Keras model
-    keras_x = observations[['lat', 'long', ]]
+    keras_x = observations[['occurrence_day', 'occurrence_day', 'occurrence_year', 'compstat_month', 'compstat_day', 'compstat_year', 'lat', 'long']].as_matrix()
+    keras_y = observations['response'].as_matrix()
 
 
     logging.info('End model')
