@@ -1,4 +1,4 @@
-name: python_environment
+name: kensho
 dependencies:
 - openssl=1.0.2h=2
 - pip=8.1.2=py27_0

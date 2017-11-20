@@ -19,10 +19,9 @@ To run the Python code, complete the following:
 ```bash
 # Install anaconda environment
 conda env create -f environment.yml 
-# Make a note of the environent name (e.g. source activate environment_name)
 
 # Activate environment
-source activate environment_name
+source activate kensho
 
 # Run script
 cd bin/
