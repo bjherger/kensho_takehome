@@ -1,0 +1,47 @@
+Dear Brendan,
+
+We'd like to get a better sense of your approach to data science and prediction. We hope this challenge is in line with the kinds of problems you like to solve. Please spend no more than 4 hours on this challenge.
+
+At this link (https://goo.gl/LYCpPY) you will find a compressed file containing data from the New York Police Department with information about crimes in New York City. The crimes are major felony incidents that that took place between 2013 and 2015.
+
+Part 0: Download & Decompress the file
+
+After decompressing the file you will find 2 files containing training data and test data:
+
+NYPD_7_Major_Felony_Incidents_Data_train.csv (incidents during 2013-2014)
+NYPD_7_Major_Felony_Incidents_Data_test.csv (incidents in 2015)
+
+Part 1: Build a model that can predict the type of ‘Offense’ given all the other features
+
+Use the train .csv file to train a model to predict the ‘Offense’ column.
+
+Your returned assignment should include:
+
+Working code which solves the problem, along with any code used for EDA, etc
+Classification accuracy of a dummy model that always guesses “GRAND LARCENY”.
+Classification accuracy of your trained model evaluated on the test data ([*]test.csv).
+
+If you wish to include other metrics you are welcome to do so, but please include the accuracy (defined as the fraction of offenses predicted correctly).
+
+Part 2: Please answer the following questions
+
+1. How would you improve your model if you had another hour?
+2. How would you improve your model if you had another week?
+3. What approach did you use?
+4. Why did you use this approach?
+5. If you’ve explored the data, please summarize key observations that you’ve made. As an example, if you’ve determined that there is seasonality in the data, explain what seasonality you’ve found and whether your observation makes sense.
+
+You will be evaluated on (in order of decreasing importance):
+
+1. Returning the assignment on time, even if you’re not done.
+2. The accuracy of your predictions on the test set.
+3. The technical soundness and thoroughness of your work
+4. How well you describe your methods and future work
+
+Please reply to this email with your answers in no more than 4 hours.
+
+Good luck!
+
+Kensho
+
+kensho.com
