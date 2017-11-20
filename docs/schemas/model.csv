@@ -3,12 +3,12 @@ identifier,object,observations
 occurrence_datetime,object,observations
 day_of_week,object,observations
 occurrence_month,object,observations
-occurrence_day,int64,observations
-occurrence_year,int64,observations
+occurrence_day,float64,observations
+occurrence_year,float64,observations
 occurrence_hour,int64,observations
-compstat_month,int64,observations
-compstat_day,int64,observations
-compstat_year,int64,observations
+compstat_month,float64,observations
+compstat_day,float64,observations
+compstat_year,float64,observations
 offense,object,observations
 sector,object,observations
 precinct,int64,observations
@@ -23,4 +23,5 @@ long,float64,observations
 response,object,observations
 is_grand_larceny,bool,observations
 max_probability,float64,observations
+prediction_index,int64,observations
 modeling_prediction,object,observations

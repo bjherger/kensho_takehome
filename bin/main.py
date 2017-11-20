@@ -52,6 +52,7 @@ def transform(observations):
     observations.columns = map(lambda x: '_'.join(x.lower().split()), observations.columns)
     observations['lat'] = observations['location_1'].apply(lambda x: eval(x)[0])
     observations['long'] = observations['location_1'].apply(lambda x: eval(x)[1])
+    
 
     # Dummy out response variable
     label_encoder = lib.create_label_encoder(observations['offense'])
@@ -64,6 +65,11 @@ def transform(observations):
     regressors = ['occurrence_day', 'occurrence_year', 'compstat_month', 'compstat_day', 'compstat_year', 'lat', 'long']
     response_var = 'response'
 
+    # TODO Normalization should always be based on training set, not just set at hand
+    for regressor in regressors:
+        max_value = observations[regressor].max()
+        min_value = observations[regressor].min()
+        observations[regressor] = (observations[regressor] - min_value) / (max_value - min_value)
     X = observations[regressors].as_matrix().astype(numpy.float32)
     y = numpy.array(observations[response_var].tolist()).astype(numpy.float32)
 
@@ -98,8 +104,9 @@ def model(observations, X, y, label_encoder):
 
     # Add predictions to data set
     preds = ff_model.predict(X)
+    print preds
     observations['max_probability'] = map(max, preds)
-    observations['prediction_index'] = map(lambda x: numpy.argmax(x))
+    observations['prediction_index'] = map(lambda x: numpy.argmax(x), preds)
     observations['modeling_prediction'] = map(lambda x: lib.prop_to_label(x, label_encoder), preds)
     trained_model = ff_model
     logging.info('End model')

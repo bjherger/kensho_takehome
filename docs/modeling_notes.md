@@ -94,3 +94,7 @@ Notes
  - Issue was due to explicitly setting data type for `Input`
  - Able to compile & train a model!
  
+Optimization
+
+ - Normalizing input variables. This is based on data set at hand
+ 

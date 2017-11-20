@@ -3,6 +3,7 @@ import logging
 import keras
 from keras import Model
 from keras.layers import Dense
+from keras.optimizers import Adam
 
 
 def gen_stupid_ff_network(input_shape, output_shape):
@@ -19,18 +20,17 @@ def gen_stupid_ff_network(input_shape, output_shape):
 
     sequence_input = keras.Input(shape=(input_shape,))
 
-    x = Dense(16, activation='linear')(sequence_input)
-    x = Dense(64, activation='relu')(x)
-    x = Dense(256, activation='relu')(x)
-    x = Dense(32, activation='relu')(x)
+    x = Dense(16, activation='relu')(sequence_input)
+    # x = Dense(64, activation='relu')(x)
+    # x = Dense(256, activation='relu')(x)
+    # x = Dense(32, activation='relu')(x)
     preds = Dense(units=output_shape, activation='softmax')(x)
-
-
 
     # Compile architecture
     classification_model = Model(sequence_input, preds)
+    adam = Adam()
     classification_model.compile(loss='categorical_crossentropy',
-                                 optimizer='rmsprop',
+                                 optimizer=adam,
                                  metrics=['acc'])
 
     return classification_model
