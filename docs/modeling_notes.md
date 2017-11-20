@@ -42,8 +42,20 @@ Performed using Tableau for geo analysis
 Tentative schedule
  - Start: 1:15
  - EDA: Until 215
- - Zeror: Until 2:30
+ - ZeroR: Until 2:30
  - Pipeline for test eval: until 3:00
  - Model
  - Writeup: 4:15
  - End: 5:00
+ 
+### ZeroR
+
+(Guess the majority class)
+
+Start: 2:07
+End: 2:30
+
+ - Checking if SKLearn has a ZeroR implementation
+ - [DummyClassifier seems to be ZeroR like](http://scikit-learn.org/stable/modules/generated/sklearn.dummy.DummyClassifier.html)
+ 
+ 
