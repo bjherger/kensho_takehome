@@ -27,3 +27,23 @@ Response:
 ### EDA
 
 Performed using Tableau for geo analysis
+
+ - Extracting lat long from location_1
+ - Lat long well behaved
+ - Vast majority of crime is Grand larceny
+ 
+- Model ideas
+  - Coarse filter: Grand larceny or not
+  - Bin time of day into morning, day, evening, night
+  - Weekday / weekend
+  - Dummy out Burough
+  - Manhattan or not filter
+
+Tentative schedule
+ - Start: 1:15
+ - EDA: Until 215
+ - Zeror: Until 2:30
+ - Pipeline for test eval: until 3:00
+ - Model
+ - Writeup: 4:15
+ - End: 5:00

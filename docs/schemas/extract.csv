@@ -1,0 +1,20 @@
+variable,type,data_set
+Identifier,object,observations
+Occurrence Datetime,object,observations
+Day of Week,object,observations
+Occurrence Month,object,observations
+Occurrence Day,int64,observations
+Occurrence Year,int64,observations
+Occurrence Hour,int64,observations
+CompStat Month,int64,observations
+CompStat Day,int64,observations
+CompStat Year,int64,observations
+Offense,object,observations
+Sector,object,observations
+Precinct,int64,observations
+Borough,object,observations
+Jurisdiction,object,observations
+XCoordinate,int64,observations
+YCoordinate,int64,observations
+Location 1,object,observations
+Occurrence Date,object,observations
