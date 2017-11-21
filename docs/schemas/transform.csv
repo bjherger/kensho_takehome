@@ -20,5 +20,7 @@ location_1,object,observations
 occurrence_date,object,observations
 lat,float64,observations
 long,float64,observations
+is_manhattan,bool,observations
+is_ny_police,bool,observations
 response,object,observations
 is_grand_larceny,bool,observations

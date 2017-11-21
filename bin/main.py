@@ -29,7 +29,7 @@ def main():
     observations = extract()
 
     # Transform data for model use
-    observations, X, y, label_encoder = transform(observations)
+    observations, X, y, label_encoder = transform(observations, None)
 
     # Tran model
     observations, X, y, label_encoder, trained_model = model(observations, X, y, label_encoder)
@@ -46,17 +46,28 @@ def extract():
     return observations
 
 
-def transform(observations):
+def transform(observations, label_encoder):
     logging.info('Begin transform')
 
+    # Feature engineering
     observations.columns = map(lambda x: '_'.join(x.lower().split()), observations.columns)
     observations['lat'] = observations['location_1'].apply(lambda x: eval(x)[0])
     observations['long'] = observations['location_1'].apply(lambda x: eval(x)[1])
-    
+
+    # TODO Feature engineering
+    observations['is_manhattan'] = observations['borough'] == 'MANHATTAN'
+    observations['is_ny_police'] = observations['jurisdiction'] == 'N.Y. POLICE DEPT'
+    # observations['occurence_epoch'] = pandas.to_datetime(observations['occurrence_datetime'], format='%m/%d/%y %I:%M:%S %p')
+    # print observations['occurence_epoch'][0], type(observations['occurence_epoch'][0])
+    # observations['compstat_date'] = observations['compstat_year'].astype(str) + '-' + observations['compstat_month'].astype(str)  + '-' + \
+    #                                 observations['compstat_day'].astype(str)
+    #
 
     # Dummy out response variable
-    label_encoder = lib.create_label_encoder(observations['offense'])
+    if label_encoder is None:
+        label_encoder = lib.create_label_encoder(observations['offense'])
     observations['response'] = observations['offense'].apply(lambda x: label_encoder[x])
+
     observations['is_grand_larceny'] = observations['offense'].apply(lambda x: x == 'GRAND LARCENY')
     logging.info('is_grand_larceny value counts: {}'.format(observations['is_grand_larceny'].value_counts()))
 
@@ -70,6 +81,7 @@ def transform(observations):
         max_value = observations[regressor].max()
         min_value = observations[regressor].min()
         observations[regressor] = (observations[regressor] - min_value) / (max_value - min_value)
+    regressors.extend(['is_manhattan', 'is_ny_police'])
     X = observations[regressors].as_matrix().astype(numpy.float32)
     y = numpy.array(observations[response_var].tolist()).astype(numpy.float32)
 
@@ -104,7 +116,7 @@ def model(observations, X, y, label_encoder):
 
     # Add predictions to data set
     preds = ff_model.predict(X)
-    print preds
+    
     observations['max_probability'] = map(max, preds)
     observations['prediction_index'] = map(lambda x: numpy.argmax(x), preds)
     observations['modeling_prediction'] = map(lambda x: lib.prop_to_label(x, label_encoder), preds)
@@ -112,6 +124,14 @@ def model(observations, X, y, label_encoder):
     logging.info('End model')
     lib.archive_dataset_schemas('model', locals(), globals())
     return observations, X, y, label_encoder, trained_model
+
+def validate(model, train_label_encoder):
+    test_observations = pandas.read_csv(lib.get_conf('test_path'))
+
+    test_observations, test_X, test_y, train_label_encoder = transform(test_observations, train_label_encoder)
+
+
+
 
 
 def load(observations, X, y, label_encoder, trained_model):
