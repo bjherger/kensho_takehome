@@ -1,11 +1,14 @@
-# Python Starter Repo
+# kensho takehome
 
-Project Description
+[Kensho](https://www.kensho.com/) provided a 4 hour data scientist data challenge. I built a few models, 
+none of which did better than ZeroR. 
 
 ## Getting started
 
 ### Repo structure
-Where important things are. 
+
+ - `bin/main.py`: Code entry point
+ - `docs/writeup.md`: Write up of data challenge
 
 ### Python Environment
 Python code in this repo utilizes packages that are not part of the common library. To make sure you have all of the 

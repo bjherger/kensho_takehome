@@ -1,2 +1,4 @@
 train_path: ../data/input/NYPD_7_Major_Felony_Incidents_train.csv
+test_path: ../data/input/NYPD_7_Major_Felony_Incidents_test.csv
 data_schema_dir: ../docs/schemas
+evaluate_test: True

@@ -89,3 +89,12 @@ Easy to conver to numerical
  - occurence_date epoch time or something
  
  
+Notes
+ - Issue related to data types
+ - Issue was due to explicitly setting data type for `Input`
+ - Able to compile & train a model!
+ 
+Optimization
+
+ - Normalizing input variables. This is based on data set at hand
+ 
