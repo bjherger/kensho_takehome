@@ -135,8 +135,22 @@ def validate(model, train_label_encoder):
 
     test_observations, test_X, test_y, train_label_encoder = transform(test_observations, train_label_encoder)
 
+
+    # Dummy model
+    dummy_X = test_observations[['lat', 'long']].as_matrix()
+    dummy_y = test_observations['is_grand_larceny']
+    dummy_clf = DummyClassifier(strategy='constant', constant=1)
+
+    # Calling fit doesn't actually effect the model at all, it still just guesses the majority case. This is necessary
+    # for SKLearn model validation.
+    dummy_clf.fit(dummy_X, dummy_y)
+    print('Dummy modle accuracy: {}'.format(dummy_clf.score(dummy_X, dummy_y)))
+
+    # Trained model
     print model.evaluate(test_X, test_y)
     print model.metrics, model.metrics_names
+
+
 
 
 def load(observations, X, y, label_encoder, trained_model):
