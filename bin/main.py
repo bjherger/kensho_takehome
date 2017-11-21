@@ -31,8 +31,12 @@ def main():
     # Transform data for model use
     observations, X, y, label_encoder = transform(observations, None)
 
-    # Tran model
+    # Train model
     observations, X, y, label_encoder, trained_model = model(observations, X, y, label_encoder)
+
+    # Evaluate model (if necessary)
+    if lib.get_conf('evaluate_test'):
+        validate(trained_model, label_encoder)
 
     # Export data, model, and other assets for external / future use
     load(observations, X, y, label_encoder, trained_model)
@@ -92,14 +96,14 @@ def transform(observations, label_encoder):
 def model(observations, X, y, label_encoder):
     logging.info('Beginning model')
 
-    # # Data split, formatting
-    # dummy_X = observations[['lat', 'long']].as_matrix()
-    # dummy_y = observations['is_grand_larceny']
-    #
-    # # ZeroR Model
-    # dummy_clf = DummyClassifier(strategy='constant', constant=1)
-    # dummy_clf.fit(dummy_X, dummy_y)
-    # print('Dummy modle accuracy: {}'.format(dummy_clf.score(dummy_X, dummy_y)))
+    # Data split, formatting
+    dummy_X = observations[['lat', 'long']].as_matrix()
+    dummy_y = observations['is_grand_larceny']
+
+    # ZeroR Model
+    dummy_clf = DummyClassifier(strategy='constant', constant=1)
+    dummy_clf.fit(dummy_X, dummy_y)
+    print('Dummy modle accuracy: {}'.format(dummy_clf.score(dummy_X, dummy_y)))
 
     # Keras model
 
@@ -116,7 +120,8 @@ def model(observations, X, y, label_encoder):
 
     # Add predictions to data set
     preds = ff_model.predict(X)
-    
+    ff_model.metrics, ff_model.metrics_names
+
     observations['max_probability'] = map(max, preds)
     observations['prediction_index'] = map(lambda x: numpy.argmax(x), preds)
     observations['modeling_prediction'] = map(lambda x: lib.prop_to_label(x, label_encoder), preds)
@@ -130,8 +135,8 @@ def validate(model, train_label_encoder):
 
     test_observations, test_X, test_y, train_label_encoder = transform(test_observations, train_label_encoder)
 
-
-
+    print model.evaluate(test_X, test_y)
+    print model.metrics, model.metrics_names
 
 
 def load(observations, X, y, label_encoder, trained_model):

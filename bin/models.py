@@ -20,10 +20,10 @@ def gen_stupid_ff_network(input_shape, output_shape):
 
     sequence_input = keras.Input(shape=(input_shape,))
 
-    x = Dense(16, activation='relu')(sequence_input)
-    # x = Dense(64, activation='relu')(x)
-    # x = Dense(256, activation='relu')(x)
-    # x = Dense(32, activation='relu')(x)
+    x = Dense(16, activation='linear')(sequence_input)
+    x = Dense(64, activation='relu')(x)
+    x = Dense(512, activation='relu')(x)
+    x = Dense(32, activation='relu')(x)
     preds = Dense(units=output_shape, activation='softmax')(x)
 
     # Compile architecture
